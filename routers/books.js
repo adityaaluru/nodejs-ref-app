@@ -6,6 +6,10 @@ const router = express.Router();
 const Ajv = require('ajv');
 const ajv = new Ajv();
 
+//Create a framework for schema validation which reads (and caches) schemas read from files 
+//and validates the same for all POST/PUT calls. Also include a standard response structure that
+//can wrap the validation errors
+
 const schema = {
     type: "object",
     properties: {
