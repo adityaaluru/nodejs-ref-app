@@ -1,0 +1,10 @@
+{
+    "appName": "My HTTP Server - Production",
+    "config": {
+        "accessLogs": true,
+        "static": {
+            "enabled": true,
+            "path": "./public"
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "appName": "My HTTP Server - Development",
+    "config": {
+        "listenerPort": 3000,
+        "enableAccessLogs": true,
+        "static": {
+            "enabled": true,
+            "path": "./public"
+        },
+        "debug": {
+            "namespaces": "info:*,warn:*,error:*"
+        }
+    }
+}
