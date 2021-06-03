@@ -5,7 +5,7 @@ A reference Node-Express app for the enterprise developers:
 - Configuration framework using the **'config'** npm module 
 - Logging framework based on the **'debug'** npm module
 - Access logs implemented through tailored implementation of **'morgan'** npm module
-- Security implemented using OAuth 2.0 and OpenIDConnect (TBD)
+- Security implemented (OAuth 2.0 and OpenIDConnect) using **'openid-client'** npm module
 - Request validation and standardization of error response leveraging the **'ajv'** npm module
 - Optional views as **'moustache'** templates
 - Optional static file hosting
