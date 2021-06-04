@@ -1,7 +1,10 @@
 const express = require('express');
-const books = require('./routers/books');
 const config = require('config');
-const morgan = require('morgan');
+
+const PORT = 3000;
+
+//Load express routers
+const books = require('./routers/books');
 
 //utilify this debug as a framework - 
 //get a common logger with info, error, warn methods and automatically add the filename of the JS file
@@ -11,13 +14,18 @@ const info = debug('info').extend('index');
 const error = debug('error').extend('index'); 
 const warn = debug('warn').extend('index');
 
-const port = 3000;
-
 
 //Configure Express and its JSON middleware
 const app = express();
 app.use(express.json()); //required middleware for POST calls
 //app.use(express.urlencoded({extended: true})); // for URL encoded payloads converted to JSON
+
+//Change this later for an extensive access logging - that includes headers, payload as necessary
+if(config.has('config.enableAccessLogs') && config.get('config.enableAccessLogs')){
+    const morgan = require('morgan');
+    app.use(morgan('common'));
+    info('Enabled access logs...');
+}
 
 //Configure static file hosting
 if(config.has('config.static.enabled') && config.get('config.static.enabled')){
@@ -29,23 +37,30 @@ if(config.has('config.static.enabled') && config.get('config.static.enabled')){
     info('Enabled middleware for static files...');
 }
 
-//Change this later for an extensive access logging - that includes headers, payload as necessary
-if(config.has('config.enableAccessLogs') && config.has('config.enableAccessLogs')){
-    app.use(morgan('common'));
-    info('Enabled access logs...');
+//Configure templating engine
+if(config.has('config.enableViewTemplates') && config.get('config.enableViewTemplates')){
+    const mustacheExpress = require('mustache-express');
+    app.engine('mst', mustacheExpress());
+    app.set('view engine', 'mst');
+    app.set('views', __dirname + '/views');
+    info('Enabled views...');
+
+    //Configure a sample view
+    app.get('/views/sample-view',function(request,response){
+        response.render('sample-view',{subject: request.query.sub});
+    });
 }
+
+
+//Configure default route
+app.get('/',function(request,response){
+    response.redirect('/index.html');
+});
 
 //Configure various route handles
 app.use('/books',books);
 
-//Create a template based hello world - use the app name from config
-app.get('/',function(request,response){
-    response.send('Hello World!');
+//Start the app
+app.listen(PORT, function(){
+    console.log('Server listening on port '+ PORT);
 });
-
-app.listen(port, function(){
-    console.log('Server listening on port '+ port);
-});
-
-//if the environment variable NODE_ENV is not set, then default is given as development
-//console.log(`NODE_ENV (app): ${app.get('env')}`);

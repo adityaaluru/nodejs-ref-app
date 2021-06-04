@@ -9,6 +9,7 @@
         },
         "debug": {
             "namespaces": "info:*,warn:*,error:*"
-        }
+        },
+        "enableViewTemplates": true
     }
 }
