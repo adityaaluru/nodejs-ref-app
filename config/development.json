@@ -2,7 +2,6 @@
     "appName": "My HTTP Server - Development",
     "config": {
         "listenerPort": 3000,
-        "enableAccessLogs": true,
         "static": {
             "enabled": true,
             "path": "./public"
@@ -11,7 +10,16 @@
             "rootLevel": "ERROR",
             "exceptions": [
                 {"package": "test.*","logLevel": "INFO"}
-            ]
+            ],
+            "format": "json",
+            "express": {
+                "logReqHeaders": false,
+                "logResHeaders": false,
+                "generateMsgId": true,
+                "logLocals": false,
+                "traceIdHeader": "X_TRACE_ID", // This header from the req is passed into res.locals for end to end tracing
+                "logType": "roundtrip"
+            }
         },
         "enableViewTemplates": true
     }

@@ -1,3 +1,5 @@
+Fields for the log message:
+--------------------------
 <timestamp in zulu timezone>
 <unique msg processing id>
 <time since start of processing of the message> - custom span (perf logs)
@@ -8,12 +10,14 @@
 <message>
 <log package>
 <log Level>
-<extension>
+<context obj>
 	<numeric>
     <string>
 
-logger.debug(<msg>)
+Logger API
+----------
 logger.debug(<msg>,<additionl object>);
+logger.debug(<msg>)
 logger.info(<msg>)
 logger.info(<msg>,<additionl object>);
 logger.warn(<msg>)
@@ -31,3 +35,7 @@ logger.endSpan() - argument not required as it closes the current open span
 logger.addToContext(<context obj>) - adds any additional data to the context
 logger.getContext() - get the current context object (to add more data if needed)
 logger.resetContext() - resets/removes any additional functional information being carried in the context like orderId (ideal for a express middleware?)
+
+Notes:
+------
+Include support for SYSLOG and APPLOG
