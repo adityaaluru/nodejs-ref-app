@@ -39,7 +39,6 @@ router.get("/:resource/:id", async (req, res) => {
   try {
     const fileContents = await readResources(resource);
     const movie = JSON.parse(fileContents).filter((movie) => movie._id === id);
-    console.log("Movie", movie);
     if (movie.length > 0) {
       result = movie[0];
       res.status(200);
@@ -193,7 +192,7 @@ let validateResource = async function (resourceName, resource) {
       }
     }
   } catch (err) {
-    console.log(err);
+    console.log("Error: ", err);
     validationResult.isValid = false;
     validationResult.message = err.message;
   }

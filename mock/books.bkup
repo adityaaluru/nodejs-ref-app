@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "100",
+    "name": "The Alchemist",
+    "description": "Paulo Coelho's classic"
+  },
+  {
+    "_id": "101",
+    "name": "The Fountainhead",
+    "description": "Ayn Rand's controversial novel"
+  },
+  {
+    "_id": "102",
+    "name": "A Brief History of Time",
+    "description": "Stephen Hawking's popular legacy"
+  },
+  {
+    "_id": "103",
+    "name": "Principia Mathematica",
+    "description": "When Sir Isaac Newton invented calculus"
+  }
+]
