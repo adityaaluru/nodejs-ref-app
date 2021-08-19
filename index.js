@@ -1,5 +1,6 @@
 const express = require("express");
 const config = require("config");
+const cors = require("cors");
 
 const PORT = 3000;
 
@@ -18,6 +19,7 @@ const warn = debug("warn").extend("index");
 //Configure Express and its JSON middleware
 const app = express();
 app.use(express.json()); //required middleware for POST calls
+app.use(cors());
 //app.use(express.urlencoded({extended: true})); // for URL encoded payloads converted to JSON
 
 //Change this later for an extensive access logging - that includes headers, payload as necessary
